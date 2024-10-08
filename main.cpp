@@ -6,5 +6,5 @@ int main() {
 
 	printf("ああああ");
 
-	return 0;
+	return 0; 
 }
