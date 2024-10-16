@@ -1,22 +1,55 @@
 #include <stdio.h>
 #include <Windows.h>
+#include <time.h>
 
-int Recursive(int time) {
-	if (time <= 1) {
-		return 100;
-	}
-	return ((time * 100 - 50) + Recursive(time - 1));
+int ShakeDice() {
+	unsigned int CurrentTime = time(nullptr);
+	srand(CurrentTime);
+	int dice = rand() % 6 + 1;
+	return dice;
 }
 
+typedef void(*PFunk)(int *);
+
+void Shuffle(int* s) {
+	printf("I'm currently shuffling...\nPlease wait %d second...",*s);
+}
+
+void SetTimeOut(PFunk p, int second) {
+	Sleep(1000 * second);
+	p(&second);
+}
 
 int main() {
 	SetConsoleOutputCP(65001);
-	int time = 22;
-	int Rmoney = Recursive(time);
 
-	int Nmoney = 1072 * time;
+	int(*dice)();
+	dice = ShakeDice;
 
-	printf("Recursive:%d\nNormal:%d", Rmoney, Nmoney);
+	int diceNum = dice();
+
+	int result = diceNum % 2;
+
+	int answer = 0;
+
+	PFunk p;
+	p = Shuffle;
+
+	printf("Odd or Even?\n1 : Odd   2 : Even\n");
+	scanf_s("%d", &answer);
+	if (answer == result) {
+		SetTimeOut(p, 3);
+		printf("dice is %d\n", diceNum);
+		Sleep(1000);
+		printf("You win!");
+	}
+	else {
+		SetTimeOut(p, 3);
+		printf("dice is %d\n", diceNum);
+		Sleep(1000);
+		printf("You lose...");
+	}
+
 
 	return 0;
 }
