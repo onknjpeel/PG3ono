@@ -9,10 +9,10 @@ int ShakeDice() {
 	return dice;
 }
 
-typedef void(*PFunk)(int *);
+typedef void(*PFunk)(int*);
 
 void Shuffle(int* s) {
-	printf("I'm currently shuffling...\nPlease wait %d second...",*s);
+	printf("I'm currently shuffling...\nPlease wait %d second...", *s);
 }
 
 void SetTimeOut(PFunk p, int second) {
@@ -28,7 +28,7 @@ int main() {
 
 	int diceNum = dice();
 
-	int result = diceNum % 2;
+	auto result = [=](int i) {return i % 2; };
 
 	int answer = 0;
 
@@ -37,7 +37,7 @@ int main() {
 
 	printf("Odd or Even?\n1 : Odd   2 : Even\n");
 	scanf_s("%d", &answer);
-	if (answer == result) {
+	if (answer == result(diceNum)) {
 		SetTimeOut(p, 3);
 		printf("dice is %d\n", diceNum);
 		Sleep(1000);
