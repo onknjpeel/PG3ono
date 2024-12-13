@@ -132,8 +132,12 @@
     <ClCompile Include="TempClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cabbage.h" />
+    <ClInclude Include="Carrot.h" />
+    <ClInclude Include="EggPrant.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="TempClass.h" />
+    <ClInclude Include="Vegetable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
