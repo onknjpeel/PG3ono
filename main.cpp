@@ -1,26 +1,25 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <time.h>
-#include "Enemy.h"
-#include "TempClass.h"
-#include "Vegetable.h"
-#include "Cabbage.h"
-#include "Carrot.h"
-#include "EggPrant.h"
+#include "IShape.h"
+#include "Circle.h"
+#include "Rect.h"
 
 int main() {
 	SetConsoleOutputCP(65001);
 
-	Vegitable* vegitable[3] = { new Cabbage,new Carrot,new EggPrant };
+	IShape* iShape[2] = { new Circle ,new Rect };
 
-	puts("");
-
-	for (int i = 0; i < 3; i++) {
-		vegitable[i]->Mood();
+	for (int i = 0; i < 2; ++i) {
+		iShape[i]->Size();
 	}
 
-	for (int i = 0; i < 3; i++) {
-		delete vegitable[i];
+	for (int i = 0; i < 2; ++i) {
+		iShape[i]->Draw();
+	}
+
+	for (int i = 0; i < 2; ++i) {
+		delete iShape[i];
 	}
 
 	return 0;
