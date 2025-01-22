@@ -10,19 +10,24 @@
 
 using namespace std;
 
-void PrintThread(uint32_t num) {
-	cout << "thread No" << num << endl;
-}
-
 int main() {
 	SetConsoleOutputCP(65001);
 
-	thread t1(PrintThread, 1);
-	t1.join();
-	thread t2(PrintThread, 2);
-	t2.join();
-	thread t3(PrintThread, 3);
-	t3.join();
+	string a(100000, 'a');
+
+	auto copy_start = std::chrono::high_resolution_clock::now();
+	std::string copied = a;
+	auto copy_end = std::chrono::high_resolution_clock::now();
+
+	auto move_start = std::chrono::high_resolution_clock::now();
+	std::string moved = std::move(a);
+	auto move_end = std::chrono::high_resolution_clock::now();
+
+	auto copy_duration = std::chrono::duration_cast<std::chrono::microseconds>(copy_end - copy_start).count();
+	auto move_duration = std::chrono::duration_cast<std::chrono::microseconds>(move_end - move_start).count();
+
+	std::cout << "Copy time: " << copy_duration << " µs" << std::endl;
+	std::cout << "Move time: " << move_duration << " µs" << std::endl;
 
 	return 0;
 }
